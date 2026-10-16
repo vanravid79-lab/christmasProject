@@ -1,0 +1,1264 @@
+<!doctype html>
+<html lang="km">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo Frame Screen</title>
+
+    <!-- ========================================
+         KANTUMRUY PRO
+    ======================================== -->
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+
+    <!-- ========================================
+         LOTTIE
+    ======================================== -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js">
+    </script>
+
+    <style>
+        /* ========================================
+            GLOBAL RESET
+        ======================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Kantumruy Pro", sans-serif;
+            background: #f2f4f7;
+            color: #222;
+            line-height: 1.8;
+            margin: 0;
+            padding-top: 20px;
+            padding-bottom: 260px;
+            overflow-anchor: none;
+            transition: padding-bottom 0.35s ease;
+        }
+
+        /* ========================================
+            TOP FRAME
+        ======================================== */
+        .top-frame {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            z-index: 9999;
+            pointer-events: none;
+            will-change: transform, opacity;
+            transform: translate3d(0, 0, 0);
+            opacity: 1;
+            transition:
+                transform 0.35s ease,
+                opacity 0.35s ease;
+        }
+
+        /* ========================================
+            HIDE TOP
+        ======================================== */
+        .hide-top {
+            transform: translate3d(0, -110%, 0);
+            opacity: 0;
+        }
+
+        /* ========================================
+            TOP AD
+        ======================================== */
+        .top-ad {
+            position: relative;
+            width: 720px;
+            height: 250px;
+            overflow: hidden;
+            border-radius: 0 0 18px 18px;
+            background: transparent;
+            pointer-events: auto;
+            box-shadow: none;
+        }
+
+        .snowfall {
+            position: absolute;
+            z-index: 11;
+            pointer-events: none;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .snowfall span {
+            position: absolute;
+            top: -8px;
+            left: var(--left);
+            width: calc(var(--size) * 2);
+            height: calc(var(--size) * 2);
+            border-radius: 50%;
+            background: rgba(255, 255, 255, var(--opacity));
+            box-shadow: 0 0 5px rgba(220, 240, 255, 0.7);
+            filter: blur(var(--blur));
+            animation: snow-fall var(--duration) linear var(--delay) infinite;
+        }
+
+        @keyframes snow-fall {
+            0% {
+                transform: translate3d(0, -8px, 0);
+            }
+
+            50% {
+                transform: translate3d(var(--drift-mid), 125px, 0);
+            }
+
+            100% {
+                transform: translate3d(var(--drift), 260px, 0);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .snowfall span,
+            .christmasTop img {
+                animation: none;
+            }
+        }
+
+        .christmasTop {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 10;
+            width: 80%;
+            height: 80%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .christmasTop img {
+            width: 75%;
+            object-fit: contain;
+            transform-origin: 50% 65%;
+            animation: christmas-image-sway 2s ease-in-out infinite;
+        }
+
+        @keyframes christmas-image-sway {
+
+            0%,
+            100% {
+                transform: translateX(-8px) rotate(-1deg);
+            }
+
+            50% {
+                transform: translateX(8px) rotate(1deg);
+            }
+        }
+
+        /* ========================================
+            CONTENT
+        ======================================== */
+        .content {
+            width: calc(100% - 32px);
+            max-width: 860px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.05);
+            transition: margin-top 0.35s ease;
+        }
+
+        .content h2 {
+            font-size: 34px;
+            line-height: 1.4;
+            margin-bottom: 24px;
+        }
+
+        .content img {
+            display: block;
+            width: 100%;
+            border-radius: 18px;
+            margin-bottom: 24px;
+        }
+
+        .content p {
+            margin-bottom: 20px;
+            font-size: 17px;
+        }
+
+        /* ========================================
+            BOTTOM FRAME
+        ======================================== */
+        #bottom-frame {
+            position: fixed;
+            bottom: 0px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            z-index: 9999;
+            pointer-events: none;
+            will-change: transform, opacity;
+            transform: translate3d(0, 0, 0);
+            opacity: 1;
+            transition:
+                transform 0.35s ease,
+                opacity 0.35s ease;
+        }
+
+        /* ========================================
+            HIDE BOTTOM
+        ======================================== */
+        .hide-bottom {
+            transform: translate3d(0, 110%, 0);
+            opacity: 0;
+        }
+
+        /* ========================================
+            BOTTOM AD
+        ======================================== */
+        .bottom-ad {
+            position: relative;
+            width: 720px;
+            height: 250px;
+            overflow: hidden;
+            border-radius: 18px 18px 0 0;
+
+            pointer-events: auto;
+            box-shadow: none;
+        }
+
+        /* ========================================
+            LOTTIE PLAYER
+        ======================================== */
+        lottie-player {
+            width: 100%;
+            height: 100%;
+            display: block;
+            cursor: pointer;
+            background: transparent !important;
+            position: relative;
+            z-index: 5;
+        }
+
+        .bottom-ad-gift {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: min(30%, 180px);
+            height: 90%;
+            padding: 0;
+            border: 0;
+            background: transparent;
+            object-fit: contain;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 10;
+            animation: gift-float 2.4s ease-in-out infinite;
+            filter: drop-shadow(0 8px 12px rgba(120, 30, 0, 0.28));
+        }
+
+        #defaultGift {
+            display: block;
+            width: min(50%, 400px);
+            pointer-events: auto;
+            cursor: pointer;
+            transition:
+                opacity 0.35s ease,
+                visibility 0s linear 0.35s;
+        }
+
+        .bottom-ad.gift-opened #defaultGift,
+        .bottom-ad.gift-opened .gift-click-hint {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        #defaultGift img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        #unboxingGift,
+        .gift-click-hint[hidden] {
+            display: none;
+        }
+
+        .unboxing-content {
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            display: none;
+            pointer-events: none;
+        }
+
+        .bottom-ad.gift-opened .unboxing-content {
+            display: block;
+        }
+
+        #unboxingGift {
+            width: min(42%, 250px);
+            height: 100%;
+        }
+
+        .bottom-ad.gift-opened #unboxingGift {
+            display: block;
+        }
+
+        .allProduct {
+            position: absolute;
+            top: 52%;
+            left: 50%;
+            z-index: 11;
+            display: flex;
+            width: min(48%, 280px);
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            transform: translate(-50%, -50%);
+        }
+
+        .allProduct>div {
+            display: flex;
+            flex: 0 1 auto;
+            justify-content: center;
+            align-items: center;
+            min-width: 0;
+        }
+
+        .bottom-ad.gift-opened .allProduct>div {
+            animation: cans-pulse 2.8s ease-in-out 1.2s infinite;
+            transform-origin: center;
+        }
+
+        .allProduct img {
+            display: block;
+            max-width: 100%;
+            max-height: 80px;
+            object-fit: contain;
+        }
+
+        .bottom-ad.gift-opened .allProduct img {
+            animation: cans-grow 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+            transform-origin: center;
+        }
+
+        @keyframes cans-grow {
+            0% {
+                opacity: 0;
+                transform: scale(0.4);
+            }
+
+            75% {
+                opacity: 1;
+                transform: scale(1.04);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes cans-pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.15);
+            }
+        }
+
+
+
+        .gift-click-hint {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 11;
+            width: 1px;
+            height: 1px;
+            color: #fff;
+            font: 700 12px/1.2 "Kantumruy Pro", sans-serif;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.65);
+            pointer-events: none;
+            transition:
+                opacity 0.35s ease,
+                visibility 0s linear 0.35s;
+        }
+
+        .gift-click-hand {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            font-family: "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+            font-size: 38px;
+            line-height: 1;
+            filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.45));
+            animation: hand-tap 1.35s ease-in-out infinite;
+        }
+
+        .gift-click-hint::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 34px;
+            height: 34px;
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0.35);
+            opacity: 0;
+            animation: click-ripple 1.35s ease-out infinite;
+        }
+
+        .gift-click-hint>span:last-child {
+            position: absolute;
+            top: 31px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+
+        @keyframes gift-float {
+
+            0%,
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            50% {
+                transform: translate(-50%, -50%) scale(1.08);
+            }
+        }
+
+        @keyframes gift-reveal {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes hand-tap {
+
+            0%,
+            55%,
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            68% {
+                transform: translate(-50%, calc(-50% + 6px)) scale(0.92);
+            }
+
+            80% {
+                transform: translate(-50%, calc(-50% - 2px)) scale(1.02);
+            }
+        }
+
+        @keyframes click-ripple {
+
+            0%,
+            55% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.35);
+            }
+
+            65% {
+                opacity: 0.9;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1.35);
+            }
+        }
+
+        /* ========================================
+            CLOSE BUTTON
+        ======================================== */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            border: none;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.45);
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1;
+            cursor: pointer;
+            z-index: 100;
+            backdrop-filter: blur(6px);
+            transition:
+                background 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(0, 0, 0, 0.8);
+            transform: scale(1.08);
+        }
+
+        .close-btn:active {
+            transform: scale(0.95);
+        }
+
+
+
+        /* ========================================
+            MOBILE
+        ======================================== */
+        @media (max-width: 720px) {
+
+            /* NEW: stop the rubber-band bounce that makes fixed elements wobble */
+            html,
+            body {
+                overscroll-behavior-y: none;
+            }
+
+            body {
+                margin: 0;
+                padding-top: 15px;
+                padding-bottom: 34.7vw;
+            }
+
+            .top-frame {
+                left: 0;
+                right: 0;
+                width: 100%;
+                top: -11px;
+            }
+
+            .top-ad {
+                width: 100%;
+                height: 34.7vw;
+                border-radius: 0;
+            }
+
+            #bottom-frame {
+                left: 0;
+                right: 0;
+                width: 100%;
+                bottom: 0;
+                /* CHANGED: was -70px */
+            }
+
+            .bottom-ad {
+                width: 100%;
+                height: 250px;
+                border-radius: 0;
+                margin-bottom: -70px;
+                /* NEW: keeps your old -70px look */
+                transform: translateZ(0);
+                /* NEW: own GPU layer, no repaint shake */
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+            }
+
+            .content {
+                width: 100%;
+                border-radius: 0;
+                padding: 20px;
+            }
+
+            .content h2 {
+                font-size: 24px;
+                line-height: 1.5;
+            }
+
+            .content p {
+                font-size: 15px;
+            }
+
+            .close-btn {
+                width: 26px;
+                height: 26px;
+                top: 4rem;
+                right: 8px;
+                font-size: 15px;
+            }
+        }
+
+        /* ========================================
+            SMALL MOBILE
+        ======================================== */
+        @media (max-width: 400px) {
+
+            .content {
+                padding: 16px;
+            }
+
+            .content h2 {
+                font-size: 21px;
+            }
+
+            .content p {
+                font-size: 14px;
+            }
+        }
+
+        /* ========================================
+            CLEAN BOTTOM FRAME
+        ======================================== */
+
+        /* Keep the page content from hiding behind the ad */
+        body {
+            padding-bottom: 270px;
+        }
+
+        #bottom-frame {
+            bottom: 0;
+        }
+
+        .bottom-ad {
+            aspect-ratio: 720 / 250;
+            /* ad keeps its shape, never stretched or cropped */
+            height: auto;
+            margin-bottom: 0;
+
+        }
+
+        /* Small, quiet close button with a big invisible tap area */
+        .close-btn {
+            top: 8px;
+            right: 8px;
+            width: 26px;
+            height: 26px;
+            font-size: 13px;
+            background: rgba(0, 0, 0, 0.55);
+        }
+
+        .close-btn::after {
+            content: "";
+            position: absolute;
+            inset: -9px;
+            /* 44px touch target */
+        }
+
+        .close-btn:focus-visible {
+            outline: 2px solid #fff;
+            outline-offset: 2px;
+        }
+
+        @media (max-width: 720px) {
+
+            body {
+                padding-bottom: calc(34.7vw + 16px);
+                /* matches ad height */
+            }
+
+            #defaultGift {
+                width: min(70%, 250px);
+            }
+
+            .bottom-ad {
+                width: 100%;
+                height: auto;
+                margin-bottom: 0;
+                border-radius: 0;
+            }
+
+            .close-btn {
+                top: 6px;
+                right: 6px;
+                width: 26px;
+                height: 26px;
+                font-size: 13px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #bottom-frame {
+                transition: none;
+            }
+
+            .bottom-ad-gift,
+            #defaultGift,
+            .bottom-ad.gift-opened #unboxingGift,
+            .gift-click-hand,
+            .gift-click-hint::before {
+                animation: none;
+            }
+
+            .bottom-ad.gift-opened .allProduct img {
+                animation: none;
+            }
+
+            .bottom-ad.gift-opened .allProduct>div {
+                animation: none;
+            }
+
+            #defaultGift,
+            .gift-click-hint {
+                transition: none;
+            }
+        }
+
+        /* ========================================
+            KEEP BOTTOM FRAME ON SCREEN BOTTOM
+        ======================================== */
+        #bottom-frame {
+            position: fixed;
+            top: auto;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+            /* iPhone home bar */
+        }
+
+        /* ========================================
+            SMOOTH SCROLLING + SMOOTH FRAMES
+        ======================================== */
+        #bottom-frame,
+        .top-frame {
+            translate: none;
+            /* no JS offsets, browser keeps it pinned */
+            contain: layout style;
+            backface-visibility: hidden;
+            transition:
+                transform 0.45s cubic-bezier(0.22, 0.8, 0.3, 1),
+                opacity 0.35s ease;
+        }
+
+        /* blur behind the button is expensive while content scrolls under it */
+        .close-btn {
+            -webkit-backdrop-filter: none;
+            backdrop-filter: none;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        /* smooth anchor jumps only; real finger scrolling stays native */
+        html {
+            scroll-behavior: auto;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* ========================================
+            STATIC BOTTOM FRAME
+            The page scrolls inside <body>, not the browser window,
+            so the browser toolbars never resize and the frame never moves.
+        ======================================== */
+        html {
+            height: 100%;
+            height: 100dvh;
+            overflow: hidden;
+        }
+
+        body {
+            height: 100%;
+            height: 100dvh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            overscroll-behavior-y: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        #bottom-frame {
+            position: fixed;
+            bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ========================================
+         TOP FRAME
+         HIDDEN ON FIRST LOAD
+    ======================================== -->
+    <div class="top-frame hide-top" id="top-frame">
+
+        <div class="top-ad" style="margin-top: -4px;">
+
+            <!-- TOP LOTTIE -->
+            <lottie-player src="./top/data41.json" background="transparent" speed="1" loop autoplay onclick="openAd()">
+            </lottie-player>
+
+            <div class="christmasTop">
+                <img src="./assets/Marry christmas  (6).png">
+            </div>
+
+            <!-- snow fall -->
+            <div class="snowfall" aria-hidden="true">
+
+                <span
+                    style="--left: 3%; --size: 3px; --opacity: 0.8; --blur: 0px; --duration: 7s; --delay: -4s; --drift-mid: 5px; --drift: 1px;"></span>
+                <span
+                    style="--left: 8%; --size: 2px; --opacity: 0.55; --blur: 0.5px; --duration: 10s; --delay: -8s; --drift-mid: -4px; --drift: -9px;"></span>
+                <span
+                    style="--left: 14%; --size: 4px; --opacity: 0.9; --blur: 0px; --duration: 8s; --delay: -2s; --drift-mid: 8px; --drift: 13px;"></span>
+                <span
+                    style="--left: 19%; --size: 2px; --opacity: 0.6; --blur: 0.5px; --duration: 11s; --delay: -6s; --drift-mid: -6px; --drift: -2px;"></span>
+                <span
+                    style="--left: 25%; --size: 3px; --opacity: 0.75; --blur: 0.2px; --duration: 7s; --delay: -1s; --drift-mid: 4px; --drift: 10px;"></span>
+                <span
+                    style="--left: 30%; --size: 2px; --opacity: 0.5; --blur: 0.7px; --duration: 12s; --delay: -9s; --drift-mid: -8px; --drift: -14px;"></span>
+                <span
+                    style="--left: 36%; --size: 4px; --opacity: 0.85; --blur: 0px; --duration: 9s; --delay: -5s; --drift-mid: 7px; --drift: 3px;"></span>
+                <span
+                    style="--left: 41%; --size: 2px; --opacity: 0.6; --blur: 0.5px; --duration: 8s; --delay: -7s; --drift-mid: -3px; --drift: -11px;"></span>
+                <span
+                    style="--left: 47%; --size: 3px; --opacity: 0.8; --blur: 0.2px; --duration: 11s; --delay: -3s; --drift-mid: 9px; --drift: 16px;"></span>
+                <span
+                    style="--left: 52%; --size: 2px; --opacity: 0.55; --blur: 0.6px; --duration: 7s; --delay: -6s; --drift-mid: -7px; --drift: -4px;"></span>
+                <span
+                    style="--left: 58%; --size: 4px; --opacity: 0.9; --blur: 0px; --duration: 10s; --delay: -2s; --drift-mid: 5px; --drift: 12px;"></span>
+                <span
+                    style="--left: 63%; --size: 2px; --opacity: 0.55; --blur: 0.6px; --duration: 12s; --delay: -10s; --drift-mid: -9px; --drift: -15px;"></span>
+                <span
+                    style="--left: 69%; --size: 3px; --opacity: 0.8; --blur: 0.2px; --duration: 8s; --delay: -4s; --drift-mid: 6px; --drift: 2px;"></span>
+                <span
+                    style="--left: 74%; --size: 2px; --opacity: 0.6; --blur: 0.5px; --duration: 9s; --delay: -7s; --drift-mid: -5px; --drift: -12px;"></span>
+                <span
+                    style="--left: 80%; --size: 4px; --opacity: 0.85; --blur: 0px; --duration: 7s; --delay: -3s; --drift-mid: 8px; --drift: 14px;"></span>
+                <span
+                    style="--left: 85%; --size: 2px; --opacity: 0.55; --blur: 0.7px; --duration: 11s; --delay: -9s; --drift-mid: -4px; --drift: 4px;"></span>
+                <span
+                    style="--left: 91%; --size: 3px; --opacity: 0.8; --blur: 0.2px; --duration: 10s; --delay: -5s; --drift-mid: 7px; --drift: -1px;"></span>
+                <span
+                    style="--left: 97%; --size: 2px; --opacity: 0.6; --blur: 0.5px; --duration: 8s; --delay: -6s; --drift-mid: -6px; --drift: -13px;"></span>
+                <span
+                    style="--left: 1%; --size: 2px; --opacity: 0.55; --blur: 0.6px; --duration: 9s; --delay: -1s; --drift-mid: 6px; --drift: 12px;"></span>
+                <span
+                    style="--left: 6%; --size: 4px; --opacity: 0.85; --blur: 0px; --duration: 8s; --delay: -6s; --drift-mid: -5px; --drift: -1px;"></span>
+                <span
+                    style="--left: 11%; --size: 3px; --opacity: 0.75; --blur: 0.2px; --duration: 12s; --delay: -3s; --drift-mid: 9px; --drift: 15px;"></span>
+                <span
+                    style="--left: 16%; --size: 2px; --opacity: 0.6; --blur: 0.5px; --duration: 7s; --delay: -5s; --drift-mid: -7px; --drift: -12px;"></span>
+                <span
+                    style="--left: 22%; --size: 3px; --opacity: 0.8; --blur: 0px; --duration: 10s; --delay: -8s; --drift-mid: 4px; --drift: 11px;"></span>
+                <span
+                    style="--left: 27%; --size: 2px; --opacity: 0.55; --blur: 0.7px; --duration: 11s; --delay: -2s; --drift-mid: -6px; --drift: 2px;"></span>
+                <span
+                    style="--left: 33%; --size: 4px; --opacity: 0.9; --blur: 0px; --duration: 8s; --delay: -7s; --drift-mid: 8px; --drift: 14px;"></span>
+                <span
+                    style="--left: 39%; --size: 2px; --opacity: 0.6; --blur: 0.5px; --duration: 9s; --delay: -4s; --drift-mid: -9px; --drift: -3px;"></span>
+                <span
+                    style="--left: 44%; --size: 3px; --opacity: 0.75; --blur: 0.2px; --duration: 12s; --delay: -1s; --drift-mid: 5px; --drift: 12px;"></span>
+                <span
+                    style="--left: 50%; --size: 2px; --opacity: 0.55; --blur: 0.6px; --duration: 7s; --delay: -8s; --drift-mid: -4px; --drift: -10px;"></span>
+                <span
+                    style="--left: 55%; --size: 4px; --opacity: 0.85; --blur: 0px; --duration: 10s; --delay: -6s; --drift-mid: 7px; --drift: 1px;"></span>
+                <span
+                    style="--left: 61%; --size: 2px; --opacity: 0.6; --blur: 0.5px; --duration: 11s; --delay: -3s; --drift-mid: -8px; --drift: -14px;"></span>
+                <span
+                    style="--left: 67%; --size: 3px; --opacity: 0.8; --blur: 0.2px; --duration: 8s; --delay: -9s; --drift-mid: 6px; --drift: 13px;"></span>
+                <span
+                    style="--left: 72%; --size: 2px; --opacity: 0.55; --blur: 0.6px; --duration: 9s; --delay: -2s; --drift-mid: -5px; --drift: 3px;"></span>
+                <span
+                    style="--left: 78%; --size: 4px; --opacity: 0.9; --blur: 0px; --duration: 12s; --delay: -5s; --drift-mid: 9px; --drift: 16px;"></span>
+                <span
+                    style="--left: 83%; --size: 2px; --opacity: 0.6; --blur: 0.5px; --duration: 7s; --delay: -7s; --drift-mid: -7px; --drift: -13px;"></span>
+                <span
+                    style="--left: 89%; --size: 3px; --opacity: 0.8; --blur: 0.2px; --duration: 10s; --delay: -1s; --drift-mid: 5px; --drift: 10px;"></span>
+                <span
+                    style="--left: 94%; --size: 2px; --opacity: 0.55; --blur: 0.7px; --duration: 11s; --delay: -4s; --drift-mid: -8px; --drift: -2px;"></span>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- ========================================
+         CONTENT
+    ======================================== -->
+    <div class="content">
+
+        <h2>
+
+            ត្រៀមរៀបចំព្រឹត្តិការណ៍
+            "អង្គរសង្ក្រាន្ត"
+            ដ៏ធំសម្បើមនៅខេត្តសៀមរាប
+
+        </h2>
+
+        <img src="https://sknteam.com/media/ai_cambodia.jpeg" alt="News Image" />
+
+        <p>
+            <strong>ខេត្តសៀមរាប៖</strong>
+            អាជ្ញាធរខេត្តសៀមរាបបានប្រកាសថា
+            ត្រៀមខ្លួនរួចជាស្រេចក្នុងការរៀបចំព្រឹត្តិការណ៍
+            "អង្គរសង្ក្រាន្ត"
+            ឆ្នាំ២០២៦។
+        </p>
+
+        <p>
+            ព្រឹត្តិការណ៍នេះនឹងនាំមកនូវការបង្ហាញវប្បធម៌ខ្មែរ
+            ល្បែងប្រជាប្រិយ
+            ប្រគំតន្ត្រីខ្នាតធំ
+            ដើម្បីទទួលស្វាគមន៍ភ្ញៀវទេសចរជាតិ
+            និងអន្តរជាតិ។
+        </p>
+
+        <p>
+            អាជ្ញាធរក៏បានត្រៀមកម្លាំងសន្តិសុខ
+            រៀបចំសណ្តាប់ធ្នាប់យ៉ាងពេញលេញ
+            ដើម្បីធានាសុវត្ថិភាពជូនប្រជាពលរដ្ឋ។
+        </p>
+
+        <p>
+            គួរបញ្ជាក់ផងដែរថា
+            ព្រឹត្តិការណ៍នេះនឹងជួយលើកកម្ពស់
+            វិស័យទេសចរណ៍
+            និងវប្បធម៌ខ្មែរ
+            ឲ្យកាន់តែល្បីល្បាញ
+            នៅលើឆាកអន្តរជាតិ។
+        </p>
+
+        <p>
+            ការរៀបចំព្រឹត្តិការណ៍នេះ
+            នឹងបង្កើតឱកាសសម្រាប់ប្រជាពលរដ្ឋ
+            និងភ្ញៀវទេសចរជាច្រើន
+            ក្នុងការចូលរួមស្វែងយល់
+            និងរីករាយជាមួយវប្បធម៌ខ្មែរ។
+        </p>
+
+        <p>
+            ខេត្តសៀមរាបត្រូវបានរំពឹងថា
+            នឹងទទួលបានភ្ញៀវទេសចរជាច្រើន
+            ក្នុងអំឡុងពេលព្រឹត្តិការណ៍នេះ។
+        </p>
+
+        <p>
+            ព្រឹត្តិការណ៍នេះក៏ជាឱកាសមួយ
+            សម្រាប់ការផ្សព្វផ្សាយ
+            អំពីវប្បធម៌ និងប្រពៃណីខ្មែរ
+            ទៅកាន់ភ្ញៀវទេសចរអន្តរជាតិ។
+        </p>
+
+    </div>
+
+
+    <!-- ========================================
+         BOTTOM FRAME
+         VISIBLE ON FIRST LOAD
+    ======================================== -->
+    <div id="bottom-frame">
+        <div class="bottom-ad">
+
+            <button style="margin-top: 2rem;" class="close-btn" type="button" onclick="closeBottom(event)"
+                aria-label="Close advertisement">
+                <span aria-hidden="true">✕</span>
+            </button>
+
+            <lottie-player src="./bottom/data2.json" background="transparent" speed="1" loop autoplay role="link"
+                aria-label="Open advertisement" preserveAspectRatio="xMidYMax meet" onclick="openAd()">
+            </lottie-player>
+
+            <button id="defaultGift" class="bottom-ad-gift" type="button" aria-label="Open the gift">
+                <img src="./assets/gitf-removebg-preview.png" alt="">
+            </button>
+
+            <span class="gift-click-hint" aria-hidden="true">
+                <span class="gift-click-hand">👆</span>
+                <span>Tap the gift</span>
+            </span>
+
+            <div class="unboxing-content">
+                <img id="unboxingGift" class="bottom-ad-gift"
+                    src="./assets/84dd2f1a5dda475abdff1f8d3e4f7e6a-removebg-preview.png" alt="Unboxed gift">
+
+                <div class="allProduct">
+
+                    <div class="product-1" style="margin-right: -1rem; margin-top: 1rem;">
+
+                        <img src="./assets/img_3.png" alt="Festival product 1">
+
+                    </div>
+
+                    <div style="margin-top: 1rem;">
+                        <img src="./assets/img_4.png" alt="Festival product 2">
+                    </div>
+
+
+
+                    <div class="product-3" style="margin-left: -1.5rem; margin-top: 1rem;">
+                        <img src="./assets/img_6.png" alt="Festival product 4">
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+
+    <!-- ========================================
+         JAVASCRIPT
+    ======================================== -->
+    <script>
+
+        /* ========================================
+            CLICK TAG
+        ======================================== */
+
+        var clickTag = "https://www.google.com";
+
+        function openAd() {
+            window.open(clickTag, "_blank");
+        }
+
+        // default gift section
+        const defaultGift = document.getElementById("defaultGift");
+
+        function openGift() {
+            defaultGift.parentElement.classList.add("gift-opened");
+        }
+
+        defaultGift.addEventListener("click", openGift);
+
+
+        /* ========================================
+            TOP / BOTTOM VARIABLES
+        ======================================== */
+
+        let topAdClosed = false;
+        let lastScrollY = window.pageYOffset || window.scrollY;
+        let ticking = false;
+        const THRESHOLD = 12;
+
+
+        /* ========================================
+            DOM READY
+        ======================================== */
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const topFrame = document.getElementById("top-frame");
+            const bottomFrame = document.getElementById("bottom-frame");
+
+            if (topFrame) {
+                topFrame.classList.add("hide-top");
+            }
+
+            if (bottomFrame) {
+                bottomFrame.classList.remove("hide-bottom");
+                bottomFrame.style.display = "flex";
+            }
+
+        });
+
+
+        /* ========================================
+            SCROLL
+        ======================================== */
+
+        window.addEventListener("scroll", function () {
+
+            if (!ticking) {
+
+                requestAnimationFrame(updateTopAd);
+
+                ticking = true;
+
+            }
+
+        }, { passive: true });
+
+
+        /* ========================================
+            UPDATE TOP AD
+        ======================================== */
+
+        function updateTopAd() {
+
+            ticking = false;
+
+            const topFrame = document.getElementById("top-frame");
+
+            if (!topFrame || topAdClosed) {
+                return;
+            }
+
+            const y = window.pageYOffset || window.scrollY;
+
+            const maxY =
+                document.documentElement.scrollHeight -
+                window.innerHeight;
+
+
+            if (y <= 0) {
+
+                topFrame.classList.add("hide-top");
+
+                lastScrollY = 0;
+
+                return;
+            }
+
+
+            if (y >= maxY - 2) {
+                return;
+            }
+
+
+            if (Math.abs(y - lastScrollY) < THRESHOLD) {
+                return;
+            }
+
+
+            if (y > lastScrollY) {
+
+                topFrame.classList.remove("hide-top");
+
+            } else {
+
+                topFrame.classList.add("hide-top");
+
+            }
+
+
+            lastScrollY = y;
+
+        }
+
+
+        /* ========================================
+            CLOSE TOP
+        ======================================== */
+
+        function closeTop(event) {
+
+            event.stopPropagation();
+
+            topAdClosed = true;
+
+            const topFrame =
+                document.getElementById("top-frame");
+
+
+            if (topFrame) {
+
+                topFrame.classList.add("hide-top");
+
+                topFrame.style.display = "none";
+
+            }
+
+        }
+
+
+        /* ========================================
+            CLOSE BOTTOM
+        ======================================== */
+
+        function closeBottom(event) {
+
+            event.stopPropagation();
+
+            const bottomFrame =
+                document.getElementById("bottom-frame");
+
+
+            if (bottomFrame) {
+
+                bottomFrame.classList.add("hide-bottom");
+
+
+                setTimeout(function () {
+
+                    if (bottomFrame) {
+
+                        bottomFrame.style.display = "none";
+
+                    }
+
+                }, 350);
+
+            }
+
+
+            document.body.style.paddingBottom = "20px";
+
+        }
+
+
+        /* ========================================
+            TOP FRAME: SAME LOGIC, BUT READS THE BODY SCROLL
+        ======================================== */
+        (function () {
+
+            const scroller = document.body;
+            let last = 0;
+            let busy = false;
+
+            scroller.addEventListener("scroll", function () {
+
+                if (busy) return;
+
+                busy = true;
+
+                requestAnimationFrame(function () {
+
+                    busy = false;
+
+                    const topFrame = document.getElementById("top-frame");
+
+                    if (!topFrame || topAdClosed) return;
+
+                    const y = scroller.scrollTop;
+                    const maxY = scroller.scrollHeight - scroller.clientHeight;
+
+                    if (y <= 0) {
+                        topFrame.classList.add("hide-top");
+                        last = 0;
+                        return;
+                    }
+
+                    if (y >= maxY - 2) return;
+
+                    if (Math.abs(y - last) < THRESHOLD) return;
+
+                    if (y > last) {
+                        topFrame.classList.remove("hide-top");
+                    } else {
+                        topFrame.classList.add("hide-top");
+                    }
+
+                    last = y;
+
+                });
+
+            }, { passive: true });
+
+        })();
+
+    </script>
+</body>
+
+</html>
